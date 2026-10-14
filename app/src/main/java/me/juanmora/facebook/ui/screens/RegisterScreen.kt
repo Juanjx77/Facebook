@@ -1,4 +1,4 @@
-package me.juanmora.facebook
+package me.juanmora.facebook.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -14,15 +14,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FacebookRegisterScreen(myNavController: NavController) {
+fun FacebookRegisterScreen(onClickBack: () -> Unit) {
     var firstName by remember { mutableStateOf("") }
     var lastName by remember { mutableStateOf("") }
     var emailOrPhone by remember { mutableStateOf("") }
@@ -37,7 +34,7 @@ fun FacebookRegisterScreen(myNavController: NavController) {
             TopAppBar(
                 title = { },
                 navigationIcon = {
-                    IconButton(onClick = { myNavController.popBackStack() }) {
+                    IconButton(onClick = onClickBack) {
                         Text(
                             text = "←",
                             fontSize = 24.sp,
@@ -190,7 +187,7 @@ fun FacebookRegisterScreen(myNavController: NavController) {
 
             // Botón Registrarse
             Button(
-                onClick = { /* Acción de registro */ },
+                onClick = onClickBack,
                 colors = ButtonDefaults.buttonColors(containerColor = FacebookBlue),
                 modifier = Modifier
                     .fillMaxWidth()
@@ -207,7 +204,7 @@ fun FacebookRegisterScreen(myNavController: NavController) {
             Spacer(modifier = Modifier.height(16.dp))
 
             // Ir a Iniciar sesión
-            TextButton(onClick = { myNavController.popBackStack() }) {
+            TextButton(onClick = onClickBack) {
                 Text(
                     text = "¿Ya tienes una cuenta?",
                     color = FacebookBlue

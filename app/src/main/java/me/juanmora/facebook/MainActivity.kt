@@ -9,6 +9,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import me.juanmora.facebook.ui.screens.FacebookLoginScreen
+import me.juanmora.facebook.ui.screens.FacebookRegisterScreen
+import me.juanmora.facebook.ui.screens.FeedScreen
 import me.juanmora.facebook.ui.theme.FacebookTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,23 +20,34 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FacebookTheme {
-                val miNavController = rememberNavController()
-
+                val myNavController = rememberNavController()
                 NavHost(
-                    navController = miNavController,
+                    navController = myNavController,
                     startDestination = "login",
                     modifier = Modifier.fillMaxSize()
                 ) {
                     composable(route = "login") {
-                        FacebookLoginScreen(myNavController = miNavController)
+                        FacebookLoginScreen(
+                            onClickRegister = {
+                                myNavController.navigate(route = "register")
+                            },
+                            onClickIniciarSesion = {
+                                myNavController.navigate(route = "feed")
+                            }
+                        )
                     }
                     composable(route = "register") {
-                        FacebookRegisterScreen(myNavController = miNavController)
+                        FacebookRegisterScreen(
+                            onClickBack = {
+                                myNavController.popBackStack()
+                            }
+                        )
+                    }
+                    composable(route = "feed") {
+                        FeedScreen()
                     }
                 }
             }
         }
     }
 }
-
-

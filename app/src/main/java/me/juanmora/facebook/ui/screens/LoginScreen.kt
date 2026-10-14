@@ -1,6 +1,5 @@
-package me.juanmora.facebook
+package me.juanmora.facebook.ui.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
@@ -12,14 +11,12 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
@@ -32,9 +29,8 @@ private val FacebookBorderGray = Color(0xFFCCD0D5)
 private val FacebookTextGray = Color(0xFF606770)
 private val FacebookDarkText = Color(0xFF1C1E21)
 
-
 @Composable
-fun FacebookLoginScreen(myNavController: NavController) {
+fun FacebookLoginScreen(onClickRegister : ()-> Unit, onClickIniciarSesion: ()-> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -87,7 +83,9 @@ fun FacebookLoginScreen(myNavController: NavController) {
 
         // Botón Iniciar sesión
         Button(
-            onClick = {  },
+            onClick = {
+                onClickIniciarSesion
+            },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
@@ -143,7 +141,7 @@ fun FacebookLoginScreen(myNavController: NavController) {
 
         // Botón Crear cuenta nueva
         Button(
-            onClick = {myNavController.navigate("register")},
+            onClick = {onClickRegister},
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
