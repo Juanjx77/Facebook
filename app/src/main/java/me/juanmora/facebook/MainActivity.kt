@@ -12,6 +12,7 @@ import androidx.navigation.compose.rememberNavController
 import me.juanmora.facebook.ui.screens.FacebookLoginScreen
 import me.juanmora.facebook.ui.screens.FacebookRegisterScreen
 import me.juanmora.facebook.ui.screens.FeedScreen
+import me.juanmora.facebook.ui.screens.PaswdScreen
 import me.juanmora.facebook.ui.theme.FacebookTheme
 
 class MainActivity : ComponentActivity() {
@@ -33,6 +34,9 @@ class MainActivity : ComponentActivity() {
                             },
                             onClickIniciarSesion = {
                                 myNavController.navigate(route = "feed")
+                            },
+                            onClickForgotPassword = {
+                                myNavController.navigate(route = "paswd")
                             }
                         )
                     }
@@ -43,8 +47,15 @@ class MainActivity : ComponentActivity() {
                             }
                         )
                     }
+                    composable(route = "paswd") {
+                        PaswdScreen(
+                            onClickBack = {
+                                myNavController.popBackStack()
+                            }
+                        )
+                    }
                     composable(route = "feed") {
-                        FeedScreen()
+                        FeedScreen(navController = myNavController)
                     }
                 }
             }
